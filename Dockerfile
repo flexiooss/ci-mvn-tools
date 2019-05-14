@@ -15,7 +15,7 @@ RUN pip install --upgrade pip
 RUN pip install requests
 
 ENV POOM_CI_UTILS_VERSION 1.2.0-SNAPSHOT
-RUN curl -L --output /usr/local/lib/poom-ci-utilities.jar "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=staging&g=org.codingmatters.poom.ci&a=poom-ci-utilities&v=/usr/local/lib/poom-ci-utilities.jar&c=uber"
+RUN curl -L --output /usr/local/lib/poom-ci-utilities.jar "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=staging&g=org.codingmatters.poom.ci&a=poom-ci-utilities&v=${POOM_CI_UTILS_VERSION}&c=uber"
 
 COPY *.sh /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/*.sh
