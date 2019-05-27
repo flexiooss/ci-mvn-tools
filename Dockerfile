@@ -163,6 +163,7 @@ RUN mkdir -p /hotballoon-shed
 RUN git clone https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
 RUN bash /hotballoon-shed/venv.sh
 RUN bash /hotballoon-shed/hotballoon-shed.sh self-install
+RUN bash /hotballoon-shed/hotballoon-shed.sh set-flexio-registry
 COPY hbshed /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/hbshed
 
