@@ -3,6 +3,5 @@ version: '3'
 services:
 
   ci-tools:
-    build:
-      context: .
-    image: ${DOCKER_NAMESPACE:-localhost:5000}/ci-tools:$DOCKER_IMAGE_VERSION
+    build: .
+    image: ${DOCKER_REGISTRY:-localhost:5000}/codingmatters/ci-tools:${VERSION}
