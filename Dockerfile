@@ -158,9 +158,10 @@ CMD ["python3"]
 ####################
 # hotballoon-shed
 ####################
+ENV HOTBALLOON_SHED_VERSION 1.1.0
 
 RUN mkdir -p /hotballoon-shed
-RUN git clone https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
+RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
 RUN bash /hotballoon-shed/venv.sh
 RUN bash /hotballoon-shed/hotballoon-shed.sh self-install
 RUN bash /hotballoon-shed/hotballoon-shed.sh set-flexio-registry -S /hotballoon-shed
@@ -170,8 +171,10 @@ RUN chmod a+x  /usr/local/bin/hbshed
 ####################
 # flexio-flow
 ####################
+ENV FLEXIO_FLOW_VERSION 0.0.0
+
 RUN mkdir -p /flexio-flow
-RUN git clone https://github.com/flexiooss/flexio-flow.git /flexio-flow
+RUN git clone --branch $FLEXIO_FLOW_VERSION https://github.com/flexiooss/flexio-flow.git /flexio-flow
 RUN bash /flexio-flow/venv.sh
 COPY flexio-flow /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/flexio-flow
