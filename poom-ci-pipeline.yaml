@@ -4,6 +4,8 @@ from:
     branch: develop
   - url: git@github.com:Flexio-corp/pipeline-flexio-settings.git
     branch: develop
+  - url: git@github.com:Flexio-corp/pipeline-maven.git
+    branch: develop
 
 env:
   - DOCKER_REGISTRY: docker.io
