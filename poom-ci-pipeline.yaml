@@ -3,7 +3,7 @@ from:
   - url: git@github.com:Flexio-corp/pipeline-image.git
     branch: develop
   - url: git@github.com:Flexio-corp/pipeline-flexio-settings.git
-      branch: develop
+    branch: develop
 
 env:
   - DOCKER_REGISTRY: docker.io
