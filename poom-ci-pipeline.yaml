@@ -1,5 +1,8 @@
 ---
 from:
+  - url: git@github.com:Flexio-corp/pipeline-oss-settings.git
+    branch: develop
+
   - url: git@github.com:Flexio-corp/pipeline-image.git
     branch: develop
 

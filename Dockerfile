@@ -14,8 +14,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 RUN pip install --upgrade pip
 RUN pip install requests
 
-ENV POOM_CI_UTILS_VERSION 1.2.0-SNAPSHOT
-RUN curl -L --output /usr/local/lib/poom-ci-utilities.jar "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=staging&g=org.codingmatters.poom.ci&a=poom-ci-utilities&v=${POOM_CI_UTILS_VERSION}&c=uber"
+COPY settings.xml /root/.m2/settings.xml
+
+COPY download-poom-ci-utilities-pom.xml /tmp/download-poom-ci-utilities-pom.xml
+RUN mvn clean install -f /tmp/download-poom-ci-utilities-pom.xml
+RUN rm -f /tmp/download-poom-ci-utilities-pom.xml
+
 
 COPY *.sh /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/*.sh
@@ -158,7 +162,7 @@ CMD ["python3"]
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.5.0
+ENV HOTBALLOON_SHED_VERSION 1.8.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
@@ -182,4 +186,6 @@ RUN chmod a+x  /usr/local/bin/flexio-flow
 
 VOLUME ["$USER_HOME_DIR/.m2", "/src"]
 WORKDIR /src
+
+RUN rm -f /root/.m2/settings.xml
 
