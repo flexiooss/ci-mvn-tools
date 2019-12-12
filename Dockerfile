@@ -3,7 +3,7 @@ FROM openjdk:8-alpine
 RUN apk add --no-cache curl tar bash fontconfig ttf-dejavu git imagemagick graphviz maven \
     nodejs nodejs-npm yarn \
     php7 php7-json php7-phar php7-iconv php7-openssl php7-dom php7-mbstring php7-xml php7-xmlwriter php7-tokenizer \
-    python python-dev py-pip \ 
+    python python-dev py-pip \
     musl-dev gcc gnupg git openssh file
 
 RUN npm i -g raml2html
@@ -162,7 +162,7 @@ CMD ["python3"]
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.12.0
+ENV HOTBALLOON_SHED_VERSION 1.16.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
