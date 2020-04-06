@@ -27,7 +27,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs yarn
 
-RUN apt-get install ${APT_FLAGS} fontconfig ttf-dejavu git imagemagick graphviz \
+RUN apt-get install ${APT_FLAGS} fontconfig ttf-dejavu git imagemagick ghostscript graphviz \
     php php-json php-phar php-iconv \
 #    php-openssl
     php-dom php-mbstring php-xml php-xmlwriter php-tokenizer \
