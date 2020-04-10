@@ -13,6 +13,6 @@ else
   cp $WORKSPACE/secrets/settings.xml $SCRIPT_DIR/settings.xml
 fi
 
-docker-compose -f docker-compose-build.yml build
+CI_TOOLS_IMAGE_VERSION=$VERSION docker-compose -f docker-compose-build.yml build
 
 rm -f $SCRIPT_DIR/settings.xml
