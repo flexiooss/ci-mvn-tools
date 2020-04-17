@@ -74,7 +74,7 @@ RUN chmod a+x  /usr/local/bin/hbshed
 ####################
 # flexio-flow
 ####################
-ENV FLEXIO_FLOW_VERSION 0.15.0
+ENV FLEXIO_FLOW_VERSION 0.15.1
 
 RUN mkdir -p /flexio-flow
 RUN git clone --branch $FLEXIO_FLOW_VERSION https://github.com/flexiooss/flexio-flow.git /flexio-flow
