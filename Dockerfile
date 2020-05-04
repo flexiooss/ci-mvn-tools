@@ -19,13 +19,11 @@ ENV MAVEN_OPTS "-Xms$MAVEN_MS -Xmx$MAVEN_MX"
 
 RUN echo $PATH
 
-RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install ${APT_FLAGS} nodejs yarn
+RUN apt-get install ${APT_FLAGS} nodejs
 
 RUN apt-get install ${APT_FLAGS} fontconfig ttf-dejavu git imagemagick ghostscript graphviz \
     php php-json php-phar php-iconv \
@@ -61,7 +59,7 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.23.0
+ENV HOTBALLOON_SHED_VERSION 1.24.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
@@ -103,7 +101,6 @@ RUN mvn -version >> /versions.txt
 RUN echo "Flexio Flow : $FLEXIO_FLOW_VERSION" >> /versions.txt
 RUN echo "HB Shed     : $HOTBALLOON_SHED_VERSION" >> /versions.txt
 RUN echo "NodeJS      : $(node --version)" >> /versions.txt
-RUN echo "Yarn        : $(yarn --version)" >> /versions.txt
 RUN echo "NPM         : $(npm --version)" >> /versions.txt
 RUN echo "Python      : $(python --version)" >> /versions.txt
 RUN echo "Python 3    : $(python3 --version)" >> /versions.txt
