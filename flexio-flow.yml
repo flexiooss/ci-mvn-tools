@@ -1,4 +1,5 @@
 level: dev
 schemes: []
-topics: [74]
-version: 2.7.0
+topics:
+- 74
+version: 2.8.0
