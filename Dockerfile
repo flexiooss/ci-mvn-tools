@@ -59,7 +59,7 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.30.0
+ENV HOTBALLOON_SHED_VERSION 1.37.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
@@ -72,7 +72,7 @@ RUN chmod a+x  /usr/local/bin/hbshed
 ####################
 # flexio-flow
 ####################
-ENV FLEXIO_FLOW_VERSION 0.15.1
+ENV FLEXIO_FLOW_VERSION 0.19.3
 
 RUN mkdir -p /flexio-flow
 RUN git clone --branch $FLEXIO_FLOW_VERSION https://github.com/flexiooss/flexio-flow.git /flexio-flow
