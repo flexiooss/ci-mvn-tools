@@ -18,8 +18,7 @@ ENV MAVEN_MX "512m"
 ENV MAVEN_OPTS "-Xms$MAVEN_MS -Xmx$MAVEN_MX"
 
 RUN echo $PATH
-
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
 
 RUN apt-get update
 RUN apt-get upgrade -y
