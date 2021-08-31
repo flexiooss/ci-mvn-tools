@@ -49,6 +49,7 @@ RUN rm -f /tmp/download-poom-ci-utilities-pom.xml
 
 COPY *.sh /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/*.sh
+RUN ls -al /usr/local/bin/
 
 RUN mkdir -p /m2
 RUN mkdir -p /src
