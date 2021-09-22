@@ -18,8 +18,11 @@ ENV MAVEN_MX "512m"
 ENV MAVEN_OPTS "-Xms$MAVEN_MS -Xmx$MAVEN_MX"
 
 RUN echo $PATH
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
 
+####################
+# nodejs
+####################
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
