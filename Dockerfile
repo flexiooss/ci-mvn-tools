@@ -18,8 +18,11 @@ ENV MAVEN_MX "512m"
 ENV MAVEN_OPTS "-Xms$MAVEN_MS -Xmx$MAVEN_MX"
 
 RUN echo $PATH
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
 
+####################
+# nodejs
+####################
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
@@ -60,13 +63,13 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.44.0
+ENV HOTBALLOON_SHED_VERSION 1.45.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
 RUN bash /hotballoon-shed/venv.sh
-RUN bash /hotballoon-shed/hotballoon-shed.sh self-install
 RUN bash /hotballoon-shed/hotballoon-shed.sh set-flexio-registry -S /hotballoon-shed
+RUN bash /hotballoon-shed/hotballoon-shed.sh self-install
 COPY hbshed /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/hbshed
 
