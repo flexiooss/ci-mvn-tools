@@ -63,13 +63,13 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.44.0
+ENV HOTBALLOON_SHED_VERSION 1.45.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
 RUN bash /hotballoon-shed/venv.sh
-RUN bash /hotballoon-shed/hotballoon-shed.sh self-install
 RUN bash /hotballoon-shed/hotballoon-shed.sh set-flexio-registry -S /hotballoon-shed
+RUN bash /hotballoon-shed/hotballoon-shed.sh self-install
 COPY hbshed /usr/local/bin/
 RUN chmod a+x  /usr/local/bin/hbshed
 
