@@ -5,4 +5,4 @@ fi
 
 echo "Deploying version ${VERSION}"
 
-docker-compose -f docker-compose-build.yml --verbose --log-level DEBUG push
+docker-compose -f docker-compose-build.yml push
