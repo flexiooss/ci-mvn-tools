@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <poom.ci.version>2.22.0-SNAPSHOT</poom.ci.version>
+        <poom.ci.version>2.22.0</poom.ci.version>
     </properties>
 
     <dependencies>
