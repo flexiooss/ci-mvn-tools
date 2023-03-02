@@ -22,7 +22,7 @@ RUN echo $PATH
 ####################
 # nodejs
 ####################
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
@@ -63,7 +63,7 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.75.0
+ENV HOTBALLOON_SHED_VERSION 1.76.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
@@ -76,7 +76,7 @@ RUN chmod a+x  /usr/local/bin/hbshed
 ####################
 # flexio-flow
 ####################
-ENV FLEXIO_FLOW_VERSION 0.21.0
+ENV FLEXIO_FLOW_VERSION 0.24.0
 
 RUN mkdir -p /flexio-flow
 RUN git clone --branch $FLEXIO_FLOW_VERSION https://github.com/flexiooss/flexio-flow.git /flexio-flow
