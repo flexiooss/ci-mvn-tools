@@ -1,4 +1,5 @@
 FROM openjdk:13-slim
+ARG CI_TOOLS_IMAGE_VERSION
 
 ENV APT_FLAGS="--no-install-recommends -y"
 RUN apt-get update
