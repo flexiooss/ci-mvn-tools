@@ -1,12 +1,13 @@
-FROM openjdk:13-slim
+FROM openjdk:17-slim
+ARG CI_TOOLS_IMAGE_VERSION
 
 ENV APT_FLAGS="--no-install-recommends -y"
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} curl tar bash wget
 
-ENV MVN_VERSION=3.9.3
-RUN wget http://mirrors.standaloneinstaller.com/apache/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -O /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
+ENV MVN_VERSION=3.9.6
+RUN wget https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -O /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 RUN tar zxvf /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz -C /usr/local/
 
 ENV MVN_LOCATION=/usr/local/apache-maven-${MVN_VERSION}
@@ -27,11 +28,11 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
 
-RUN apt-get install ${APT_FLAGS} fontconfig ttf-dejavu git imagemagick ghostscript graphviz \
+RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz \
     php php-json php-phar php-iconv \
 #    php-openssl
     php-dom php-mbstring php-xml php-xmlwriter php-tokenizer \
-    python python-dev python3 python-pip python3-venv \
+    python python-dev python3 python3-pip python3-venv \
 #    musl-dev \
     gcc gnupg git openssh-client file
 
