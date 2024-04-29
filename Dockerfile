@@ -1,4 +1,4 @@
-FROM openjdk:17-slim
+FROM openjdk:21-slim
 ARG CI_TOOLS_IMAGE_VERSION
 
 ENV APT_FLAGS="--no-install-recommends -y"
@@ -32,7 +32,7 @@ RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostsc
     php php-json php-phar php-iconv \
 #    php-openssl
     php-dom php-mbstring php-xml php-xmlwriter php-tokenizer \
-    python python-dev python3 python3-pip python3-venv \
+    python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests \
 #    musl-dev \
     gcc gnupg git openssh-client file
 
@@ -41,8 +41,8 @@ RUN npm install -g npm-cli-login
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-RUN pip install --upgrade pip
-RUN pip install requests
+#RUN pip install --upgrade pip
+#RUN pip install requests
 
 COPY settings.xml /root/.m2/settings.xml
 
