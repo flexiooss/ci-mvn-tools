@@ -119,3 +119,5 @@ RUN echo "NPM         : $(npm --version)" >> /versions.txt
 RUN echo "Python      : $(python --version)" >> /versions.txt
 RUN echo "Python 3    : $(python3 --version)" >> /versions.txt
 RUN cat /versions.txt
+
+RUN mkdir -p /.cache/composer/vcs
