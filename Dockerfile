@@ -28,13 +28,22 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
 
-RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz \
-    php php-json php-phar php-iconv \
-#    php-openssl
-    php-dom php-mbstring php-xml php-xmlwriter php-tokenizer \
-    python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests \
-#    musl-dev \
-    gcc gnupg git openssh-client file
+
+RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz
+RUN apt-get install ${APT_FLAGS} python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests
+RUN apt-get install ${APT_FLAGS} gcc gnupg
+RUN apt-get install ${APT_FLAGS} git
+RUN apt-get install ${APT_FLAGS} openssh-client
+RUN apt-get install ${APT_FLAGS} file
+
+RUN echo "***** INSTALL PHP *****"
+
+RUN apt -y install software-properties-common python3-launchpadlib
+RUN echo "deb https://ppa.launchpadcontent.net/ondrej/php/ubuntu/ jammy main" > /etc/apt/sources.list.d/ondrej-ubuntu-php-kinetic.list
+RUN add-apt-repository ppa:ondrej/php -y
+RUN apt -y install php7.4
+RUN apt-get install ${APT_FLAGS} php7.4 php7.4-json php7.4-phar php7.4-iconv
+RUN apt-get install ${APT_FLAGS} php7.4-dom php7.4-mbstring php7.4-xml php7.4-xmlwriter php7.4-tokenizer
 
 RUN npm i -g raml2html
 RUN npm install -g npm-cli-login
