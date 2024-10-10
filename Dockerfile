@@ -28,13 +28,22 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
 
-RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz \
-    php php-json php-phar php-iconv \
-#    php-openssl
-    php-dom php-mbstring php-xml php-xmlwriter php-tokenizer \
-    python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests \
-#    musl-dev \
-    gcc gnupg git openssh-client file
+
+RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz
+RUN apt-get install ${APT_FLAGS} python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests
+RUN apt-get install ${APT_FLAGS} gcc gnupg
+RUN apt-get install ${APT_FLAGS} git
+RUN apt-get install ${APT_FLAGS} openssh-client
+RUN apt-get install ${APT_FLAGS} file
+
+RUN echo "***** INSTALL PHP *****"
+
+RUN apt -y install software-properties-common python3-launchpadlib
+RUN echo "deb https://ppa.launchpadcontent.net/ondrej/php/ubuntu/ jammy main" > /etc/apt/sources.list.d/ondrej-ubuntu-php-kinetic.list
+RUN add-apt-repository ppa:ondrej/php -y
+RUN apt -y install php7.4
+RUN apt-get install ${APT_FLAGS} php7.4 php7.4-json php7.4-phar php7.4-iconv
+RUN apt-get install ${APT_FLAGS} php7.4-dom php7.4-mbstring php7.4-xml php7.4-xmlwriter php7.4-tokenizer
 
 RUN npm i -g raml2html
 RUN npm install -g npm-cli-login
@@ -64,7 +73,7 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.80.0
+ENV HOTBALLOON_SHED_VERSION 1.85.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
@@ -77,7 +86,7 @@ RUN chmod a+x  /usr/local/bin/hbshed
 ####################
 # flexio-flow
 ####################
-ENV FLEXIO_FLOW_VERSION 0.24.0
+ENV FLEXIO_FLOW_VERSION 0.26.0
 
 RUN mkdir -p /flexio-flow
 RUN git clone --branch $FLEXIO_FLOW_VERSION https://github.com/flexiooss/flexio-flow.git /flexio-flow
@@ -110,3 +119,6 @@ RUN echo "NPM         : $(npm --version)" >> /versions.txt
 RUN echo "Python      : $(python --version)" >> /versions.txt
 RUN echo "Python 3    : $(python3 --version)" >> /versions.txt
 RUN cat /versions.txt
+
+RUN mkdir -p /.cache/composer/vcs
+RUN chmod a+rwx  /.cache/composer/vcs
