@@ -35,6 +35,7 @@ RUN apt-get install ${APT_FLAGS} gcc gnupg
 RUN apt-get install ${APT_FLAGS} git
 RUN apt-get install ${APT_FLAGS} openssh-client
 RUN apt-get install ${APT_FLAGS} file
+RUN apt-get install ${APT_FLAGS} libreoffice
 
 RUN echo "***** INSTALL PHP *****"
 
@@ -97,6 +98,9 @@ RUN chmod a+x  /usr/local/bin/flexio-flow
 
 VOLUME ["$USER_HOME_DIR/.m2", "/src"]
 WORKDIR /src
+
+
+
 
 
 ####################
