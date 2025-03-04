@@ -36,8 +36,8 @@ RUN apt-get install ${APT_FLAGS} git
 RUN apt-get install ${APT_FLAGS} openssh-client
 RUN apt-get install ${APT_FLAGS} file
 RUN apt-get install ${APT_FLAGS} libreoffice libreoffice-java-common 
-RUN mkdir -p /.cache/dconf 
-RUN chmod a+rwx  /.cache/dconf
+RUN mkdir -p /home/.cache/dconf 
+RUN chmod a+rwx  /home/.cache/dconf
 
 RUN echo "***** INSTALL PHP *****"
 
