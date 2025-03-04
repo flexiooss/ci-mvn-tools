@@ -35,7 +35,8 @@ RUN apt-get install ${APT_FLAGS} gcc gnupg
 RUN apt-get install ${APT_FLAGS} git
 RUN apt-get install ${APT_FLAGS} openssh-client
 RUN apt-get install ${APT_FLAGS} file
-RUN apt-get install ${APT_FLAGS} libreoffice
+RUN apt-get install ${APT_FLAGS} libreoffice libreoffice-common libreoffice-java-common libreoffice-headless
+RUN mkdir -p /.cache/dconf 
 
 RUN echo "***** INSTALL PHP *****"
 
