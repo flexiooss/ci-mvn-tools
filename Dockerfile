@@ -35,7 +35,9 @@ RUN apt-get install ${APT_FLAGS} gcc gnupg
 RUN apt-get install ${APT_FLAGS} git
 RUN apt-get install ${APT_FLAGS} openssh-client
 RUN apt-get install ${APT_FLAGS} file
-RUN apt-get install ${APT_FLAGS} libreoffice
+RUN apt-get install ${APT_FLAGS} libreoffice libreoffice-java-common 
+RUN mkdir -p /home/.cache/dconf 
+RUN chmod a+rwx  /home/.cache/dconf
 
 RUN echo "***** INSTALL PHP *****"
 
@@ -74,7 +76,7 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.89.0
+ENV HOTBALLOON_SHED_VERSION 1.90.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
