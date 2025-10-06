@@ -7,4 +7,6 @@ services:
       context: .
       args:
         CI_TOOLS_IMAGE_VERSION: ${VERSION}
-    image: ${DOCKER_REGISTRY:-localhost:5000}/codingmatters/ci-tools:${VERSION}
+#    image: ${DOCKER_REGISTRY:-localhost:5000}/codingmatters/ci-tools:${VERSION}
+    image: ${DOCKER_REGISTRY:-localhost:5000}/flexio/ci-tools:${VERSION}
+
