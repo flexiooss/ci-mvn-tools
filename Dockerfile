@@ -1,4 +1,4 @@
-FROM openjdk:21-slim
+FROM eclipse-temurin:25-jdk-noble
 ARG CI_TOOLS_IMAGE_VERSION
 
 ENV APT_FLAGS="--no-install-recommends -y"
@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} curl tar bash wget
 
-ENV MVN_VERSION=3.9.11
+ENV MVN_VERSION=3.9.12
 RUN wget https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -O /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 RUN tar zxvf /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz -C /usr/local/
 
