@@ -46,8 +46,22 @@ RUN apt-get install ${APT_FLAGS} wget build-essential pkg-config libtool libltdl
 RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-8.tar.gz && \
     tar xzf 7.1.2-8.tar.gz && \
     cd ImageMagick-7.1.2-8 && \
-    ./configure && \
-    make && \
+    ./configure \
+      --with-modules \
+      --enable-shared \
+      --disable-static \
+      --with-gslib \
+      --with-rsvg \
+      --with-freetype \
+      --with-fontconfig \
+      --with-jpeg \
+      --with-png \
+      --with-tiff \
+      --with-webp \
+      --with-heic \
+      --with-xml \
+      --disable-openmp && \
+    make -j2 && \
     make install && \
     ldconfig /usr/local/lib && \
     cd .. && \
