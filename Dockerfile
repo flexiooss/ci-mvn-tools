@@ -29,7 +29,7 @@ RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
 
 
-RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz
+RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git make ghostscript graphviz
 RUN apt-get install ${APT_FLAGS} python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests
 RUN apt-get install ${APT_FLAGS} gcc gnupg
 RUN apt-get install ${APT_FLAGS} git
@@ -38,6 +38,20 @@ RUN apt-get install ${APT_FLAGS} file
 RUN apt-get install ${APT_FLAGS} libreoffice libreoffice-java-common 
 RUN mkdir -p /home/.cache/dconf 
 RUN chmod a+rwx  /home/.cache/dconf
+
+RUN echo "***** INSTALL IMAGEMAGICK *****"
+
+RUN apt-get install ${APT_FLAGS} wget build-essential pkg-config libtool libltdl-dev libjpeg-dev libgs-dev librsvg2-dev libfreetype6-dev libfontconfig1-dev libxml2-dev
+
+RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-8.tar.gz && \
+    tar xzf 7.1.2-8.tar.gz && \
+    cd ImageMagick-7.1.2-8 && \
+    ./configure && \
+    make && \
+    make install && \
+    ldconfig /usr/local/lib && \
+    cd .. && \
+    rm -rf ImageMagick-7.1.2-8 7.1.2-8.tar.gz
 
 RUN echo "***** INSTALL PHP *****"
 
