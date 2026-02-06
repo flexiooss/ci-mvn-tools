@@ -40,32 +40,42 @@ RUN mkdir -p /home/.cache/dconf
 RUN chmod a+rwx  /home/.cache/dconf
 
 RUN echo "***** INSTALL IMAGEMAGICK *****"
+RUN wget https://imagemagick.org/archive/binaries/magick && \
+    chmod +x magick && \
+    ./magick --appimage-extract && \
+    mkdir -p /opt/imagemagick && \
+    mv squashfs-root/usr/* /opt/imagemagick/ && \
+    rm -rf squashfs-root magick
 
-RUN apt-get install ${APT_FLAGS} wget build-essential pkg-config libtool libltdl-dev libjpeg-dev libgs-dev librsvg2-dev libfreetype6-dev libfontconfig1-dev libxml2-dev
+RUN printf '#!/bin/sh\nexport LD_LIBRARY_PATH=/opt/imagemagick/lib\nexec /opt/imagemagick/bin/magick "$@"\n' \
+    > /usr/local/bin/magick && chmod +x /usr/local/bin/magick
 
-RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-8.tar.gz && \
-    tar xzf 7.1.2-8.tar.gz && \
-    cd ImageMagick-7.1.2-8 && \
-    ./configure \
-      --with-modules \
-      --enable-shared \
-      --disable-static \
-      --with-gslib \
-      --with-rsvg \
-      --with-freetype \
-      --with-fontconfig \
-      --with-jpeg \
-      --with-png \
-      --with-tiff \
-      --with-webp \
-      --with-heic \
-      --with-xml \
-      --disable-openmp && \
-    make -j2 && \
-    make install && \
-    ldconfig /usr/local/lib && \
-    cd .. && \
-    rm -rf ImageMagick-7.1.2-8 7.1.2-8.tar.gz
+
+#RUN apt-get install ${APT_FLAGS} wget build-essential pkg-config libtool libltdl-dev libjpeg-dev libgs-dev librsvg2-dev libfreetype6-dev libfontconfig1-dev libxml2-dev
+#
+#RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-8.tar.gz && \
+#    tar xzf 7.1.2-8.tar.gz && \
+#    cd ImageMagick-7.1.2-8 && \
+#    ./configure \
+#      --with-modules \
+#      --enable-shared \
+#      --disable-static \
+#      --with-gslib \
+#      --with-rsvg \
+#      --with-freetype \
+#      --with-fontconfig \
+#      --with-jpeg \
+#      --with-png \
+#      --with-tiff \
+#      --with-webp \
+#      --with-heic \
+#      --with-xml \
+#      --disable-openmp && \
+#    make -j2 && \
+#    make install && \
+#    ldconfig /usr/local/lib && \
+#    cd .. && \
+#    rm -rf ImageMagick-7.1.2-8 7.1.2-8.tar.gz
 
 RUN echo "***** INSTALL PHP *****"
 
