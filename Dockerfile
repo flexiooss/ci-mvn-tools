@@ -29,7 +29,7 @@ RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
 
 
-RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git make ghostscript graphviz
+RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git ghostscript graphviz
 RUN apt-get install ${APT_FLAGS} python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests
 RUN apt-get install ${APT_FLAGS} gcc gnupg
 RUN apt-get install ${APT_FLAGS} git
