@@ -1,4 +1,4 @@
-FROM openjdk:21-slim
+FROM eclipse-temurin:25-jdk-noble
 ARG CI_TOOLS_IMAGE_VERSION
 
 ENV APT_FLAGS="--no-install-recommends -y"
@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} curl tar bash wget
 
-ENV MVN_VERSION=3.9.11
+ENV MVN_VERSION=3.9.12
 RUN wget https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz -O /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz
 RUN tar zxvf /tmp/apache-maven-${MVN_VERSION}-bin.tar.gz -C /usr/local/
 
@@ -29,7 +29,7 @@ RUN apt-get upgrade -y
 RUN apt-get install ${APT_FLAGS} nodejs
 
 
-RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git imagemagick ghostscript graphviz
+RUN apt-get install ${APT_FLAGS} fontconfig fonts-dejavu git ghostscript graphviz
 RUN apt-get install ${APT_FLAGS} python-is-python3 2to3 python-dev-is-python3 python3 python3-pip python3-venv python3-requests
 RUN apt-get install ${APT_FLAGS} gcc gnupg
 RUN apt-get install ${APT_FLAGS} git
@@ -38,6 +38,17 @@ RUN apt-get install ${APT_FLAGS} file
 RUN apt-get install ${APT_FLAGS} libreoffice libreoffice-java-common 
 RUN mkdir -p /home/.cache/dconf 
 RUN chmod a+rwx  /home/.cache/dconf
+
+RUN echo "***** INSTALL IMAGEMAGICK *****"
+RUN wget https://imagemagick.org/archive/binaries/magick && \
+    chmod +x magick && \
+    ./magick --appimage-extract && \
+    mkdir -p /opt/imagemagick && \
+    mv squashfs-root/usr/* /opt/imagemagick/ && \
+    rm -rf squashfs-root magick
+
+RUN printf '#!/bin/sh\nexport LD_LIBRARY_PATH=/opt/imagemagick/lib\nexec /opt/imagemagick/bin/magick "$@"\n' \
+    > /usr/local/bin/magick && chmod +x /usr/local/bin/magick
 
 RUN echo "***** INSTALL PHP *****"
 
@@ -100,7 +111,6 @@ RUN chmod a+x  /usr/local/bin/flexio-flow
 
 VOLUME ["$USER_HOME_DIR/.m2", "/src"]
 WORKDIR /src
-
 
 
 
