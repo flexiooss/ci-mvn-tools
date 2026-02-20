@@ -50,33 +50,6 @@ RUN wget https://imagemagick.org/archive/binaries/magick && \
 RUN printf '#!/bin/sh\nexport LD_LIBRARY_PATH=/opt/imagemagick/lib\nexec /opt/imagemagick/bin/magick "$@"\n' \
     > /usr/local/bin/magick && chmod +x /usr/local/bin/magick
 
-
-#RUN apt-get install ${APT_FLAGS} wget build-essential pkg-config libtool libltdl-dev libjpeg-dev libgs-dev librsvg2-dev libfreetype6-dev libfontconfig1-dev libxml2-dev
-#
-#RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-8.tar.gz && \
-#    tar xzf 7.1.2-8.tar.gz && \
-#    cd ImageMagick-7.1.2-8 && \
-#    ./configure \
-#      --with-modules \
-#      --enable-shared \
-#      --disable-static \
-#      --with-gslib \
-#      --with-rsvg \
-#      --with-freetype \
-#      --with-fontconfig \
-#      --with-jpeg \
-#      --with-png \
-#      --with-tiff \
-#      --with-webp \
-#      --with-heic \
-#      --with-xml \
-#      --disable-openmp && \
-#    make -j2 && \
-#    make install && \
-#    ldconfig /usr/local/lib && \
-#    cd .. && \
-#    rm -rf ImageMagick-7.1.2-8 7.1.2-8.tar.gz
-
 RUN echo "***** INSTALL PHP *****"
 
 RUN apt -y install software-properties-common python3-launchpadlib
