@@ -20,5 +20,7 @@ echo "Using m2 settings from ${SETTINGS_SRC}"
 cp "${SETTINGS_SRC}" "${SCRIPT_DIR}/settings.xml"
 
 docker compose -f docker-compose-build.yml build
+status=$?
 
 rm -f "${SCRIPT_DIR}/settings.xml"
+exit $status
