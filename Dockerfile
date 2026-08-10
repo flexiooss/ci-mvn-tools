@@ -40,7 +40,7 @@ RUN mkdir -p /home/.cache/dconf
 RUN chmod a+rwx  /home/.cache/dconf
 
 RUN echo "***** INSTALL IMAGEMAGICK *****"
-RUN wget 'https://github.com/ImageMagick/ImageMagick/releases/download/7.0.8-68/ImageMagick-cdfd76e-gcc-x86_64.AppImage' && \
+RUN wget 'https://github.com/ImageMagick/ImageMagick/releases/download/7.0.8-68/ImageMagick-cdfd76e-gcc-x86_64.AppImage' -O magick && \
     chmod +x magick && \
     ./magick --appimage-extract && \
     mkdir -p /opt/imagemagick && \
