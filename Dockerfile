@@ -40,7 +40,7 @@ RUN mkdir -p /home/.cache/dconf
 RUN chmod a+rwx  /home/.cache/dconf
 
 RUN echo "***** INSTALL IMAGEMAGICK *****"
-RUN wget https://imagemagick.org/archive/binaries/magick && \
+RUN wget 'https://github.com/ImageMagick/ImageMagick/releases/download/7.0.8-68/ImageMagick-cdfd76e-gcc-x86_64.AppImage' -O magick && \
     chmod +x magick && \
     ./magick --appimage-extract && \
     mkdir -p /opt/imagemagick && \
@@ -87,7 +87,7 @@ ENV USER_HOME_DIR="/root"
 ####################
 # hotballoon-shed
 ####################
-ENV HOTBALLOON_SHED_VERSION 1.96.0
+ENV HOTBALLOON_SHED_VERSION 1.101.0
 
 RUN mkdir -p /hotballoon-shed
 RUN git clone --branch $HOTBALLOON_SHED_VERSION https://github.com/flexiooss/hotballoon-shed.git /hotballoon-shed
